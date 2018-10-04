@@ -127,7 +127,7 @@ num_cv = 5
 n_jobs = 5
 verbose = 20
 refit = "precision"
-downsample_rate = 10
+downsample_rate = 1
 
 df = pd.read_csv(
     path_to_training_data, usecols=cols_process, skiprows=lambda i: i % downsample_rate != 0
