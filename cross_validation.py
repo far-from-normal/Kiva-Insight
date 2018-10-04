@@ -27,7 +27,7 @@ from data_params import Data
 
 
 def plot_confusion_matrix(
-    cm, classes, name, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues
+    cm, classes, name, normalize=False, title="Confusion matrix", cmap=plt.cm.Greens
 ):
     """
     This function prints and plots the confusion matrix.
@@ -192,7 +192,7 @@ for l1_rat in l1_ratio:
         cm_plot_filename_norm,
         normalize=True,
         title="Confusion matrix",
-        cmap=plt.cm.Blues,
+        cmap=plt.cm.Greens,
     )
     plot_confusion_matrix(
         conf_mat,
@@ -200,7 +200,7 @@ for l1_rat in l1_ratio:
         cm_plot_filename_raw,
         normalize=False,
         title="Confusion matrix",
-        cmap=plt.cm.Blues,
+        cmap=plt.cm.Greens,
     )
 
     print("Training Model")

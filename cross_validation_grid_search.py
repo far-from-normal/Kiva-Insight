@@ -37,7 +37,7 @@ from data_params import Data
 
 
 def plot_confusion_matrix(
-    cm, classes, name, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues
+    cm, classes, name, normalize=False, title="Confusion matrix", cmap=plt.cm.Greens
 ):
     """
     This function prints and plots the confusion matrix.
@@ -186,7 +186,7 @@ plot_confusion_matrix(
     cm_plot_filename_norm,
     normalize=True,
     title="Confusion matrix",
-    cmap=plt.cm.Blues,
+    cmap=plt.cm.Greens,
 )
 plot_confusion_matrix(
     conf_mat,
@@ -194,7 +194,7 @@ plot_confusion_matrix(
     cm_plot_filename_raw,
     normalize=False,
     title="Confusion matrix",
-    cmap=plt.cm.Blues,
+    cmap=plt.cm.Greens,
 )
 
 df_results = pd.DataFrame(grid_search.cv_results_)

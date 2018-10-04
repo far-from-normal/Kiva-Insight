@@ -12,10 +12,9 @@ sns.set(style="darkgrid")
 
 from data_utils import (
     preprocess_train_df,
-    fit_stats,
-    transform_stats,
+    # fit_stats,
+    # transform_stats,
     save_transformed_stats)
-
 
 def summarize_stats(csv_name, dir_to_data, stat_name_select):
 
@@ -134,7 +133,7 @@ fig_size = (4.5, 2.5)
 plt.figure(figsize=fig_size)
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="ORIGINAL_LANGUAGE", x="percent_not_funded", data=df_lang, palette=("Blues_d"))
+cnt_plot1 = sns.barplot(y="ORIGINAL_LANGUAGE", x="percent_not_funded", data=df_lang, palette=("Greens_r"))
 for p in cnt_plot1.patches:
              cnt_plot1.annotate("%.1f" % p.get_width(), (p.get_width(), p.get_y() + p.get_height() / 2.),
                  ha='center', va='center', fontsize=11, color='white', xytext=(-11, 0),

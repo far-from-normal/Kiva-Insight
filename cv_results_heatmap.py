@@ -19,16 +19,16 @@ result_precision = df_scores.copy()
 result_accuracy = df_scores.copy()
 result_precision = result_precision.pivot(index='param_clf__alpha', columns='param_clf__l1_ratio', values='mean_test_precision')
 result_accuracy = result_accuracy.pivot(index='param_clf__alpha', columns='param_clf__l1_ratio', values='mean_test_accuracy')
-import numpy as np
-10.0**-np.arange(1,7)
 
+# cmap = sns.diverging_palette(150, 275, s=80, l=55, as_cmap=True)
+# cmap = sns.diverging_palette(150, 275, s=80, l=55, as_cmap=True)
 
 fig_dpi = 400
-fig_size = (4, 4)
+fig_size = (5, 4)
 plt.figure(figsize=fig_size)
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.sans-serif'] = 'Arial'
-ax = sns.heatmap(result_precision, annot=True, fmt=".4f", cmap="Blues", square=True)
+ax = sns.heatmap(result_precision, annot=True, fmt=".4f", cmap="Greens_r", square=True)
 ax.set(xlabel="L2 / ridge = 0             Penalty                  L1 / lasso = 1")
 ax.set(ylabel="Regualization (alpha = 1/C)")
 fig = ax.get_figure()
