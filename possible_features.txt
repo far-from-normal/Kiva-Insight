@@ -1,0 +1,15 @@
+
+description:
+	number of words
+	number of sentences
+	number of paragraphs
+	number of words per sentence
+	number of sentences per paragraph
+	number of dollar signs
+	avg_word_length
+
+
+tags:
+	number of hashtags
+
+remove proper nouns

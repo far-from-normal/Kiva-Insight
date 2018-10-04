@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Opt4Kiva | Maximize your chances of funding your Kiva loan!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	<!-- <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet"> -->
+
+	<!-- Custom styles for this template -->
+    <link href="../static/css/landing-page.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Opt4Kiva</a>
+      </div>
+    </nav>
+
+
+    <!-- Masthead -->
+	<header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+			<div class="col-xl-9 mx-auto">
+			  <h1 class="mb-5">Chance of success</h1>
+			  <h4 class="mb-5">Your campaign ({{loan_url_}}) has been analyzed.<br>The chance of this loan being successfully funded is</h4>
+			  <!-- <p class="lead mb-0">Your campaign ({{loan_url_}}) has been analyzed.<br>The chance of this loan being successfully funded is <br><strong>{{the_result}}.</strong></p> -->
+			  <h2 class="mb-5"><br><strong>{{the_result}}.</strong></h2>
+			</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+	<section class="features-icons bg-light text-center">
+      <div class="container">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+			  <h3>Top 6 ways to impove your chances at landing your campaign</h3>
+            </div>
+      </div>
+    </section>
+
+
+	<section class="showcase">
+	  <div class="container-fluid p-0">
+		<div class="row no-gutters">
+		  <div class="col-lg-6 order-lg-2 my-auto showcase-text">
+			  <img src="{{ url_for('static', filename = img_name_1) }}" width="125%" height="125%">
+		  </div>
+		  <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+			<h2>How to improve your campaign <b>description text:</b></h2>
+			<p class="lead mb-0"><strong>{{desc_text_words}}</strong> the number of words.</p>
+			<p class="lead mb-0"><strong>{{desc_text_sentences}}</strong> the number of sentences.</p>
+			<p class="lead mb-0"><strong>{{desc_text_paragraphs}}</strong> the number of paragraphs.</p>
+		  </div>
+		</div>
+		<div class="row no-gutters">
+		  <div class="col-lg-6 my-auto showcase-text">
+			  <img src="{{ url_for('static', filename = img_name_2) }}" width="125%" height="125%">
+		  </div>
+		  <div class="col-lg-6 my-auto showcase-text">
+			<h2>How to improve your campaign <b>loan use text:</b></h2>
+			<p class="lead mb-0"><strong>{{loanuse_text_words}}</strong> the number of words.</p>
+		  </div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col-lg-6 order-lg-2 my-auto showcase-text">
+				<img src="{{ url_for('static', filename = img_name_3) }}" width="125%" height="125%">
+			</div>
+			<div class="col-lg-6 order-lg-1 my-auto showcase-text">
+			<h2>How to improve your campaign <b>tags:</h2>
+				<p class="lead mb-0"><strong>{{tags_text_words}}</strong> the number of words.</p>
+				<p class="lead mb-0"><strong>{{tags_text_hashtags}}</strong> the number of hashtags.</p>
+		  </div>
+		</div>
+	  </div>
+	</section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
