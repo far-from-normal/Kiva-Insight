@@ -107,8 +107,10 @@ scoring = {
     # "roc_auc": "roc_auc",
 }
 
-param_grid = [{'clf__alpha': [1e-6, 1e-4, 1e-2, 1e0, 1e2],
-        'clf__l1_ratio': [0.0, 0.25, 0.5, 0.75, 1.0]}]
+# param_grid = [{'clf__alpha': [1e-6, 1e-4, 1e-2, 1e0, 1e2],
+#         'clf__l1_ratio': [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]}]
+param_grid = [{'clf__alpha': [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7],
+        'clf__l1_ratio': [0.0, 0.01, 0.1, 0.25, 0.5, 0.75, 1.0]}]
 
 # %% ############################
 
@@ -124,7 +126,7 @@ path_to_training_data = data_par.path_to_training_data
 
 predict = False
 num_cv = 5
-n_jobs = 5
+n_jobs = 15
 verbose = 20
 refit = "precision"
 downsample_rate = 1
@@ -172,7 +174,8 @@ print(grid_search.best_estimator_)
 print("Testing Model")
 # y_pred = cross_val_predict(pipeline, df[cols_X], labels, cv=num_cv, verbose=verbose, n_jobs=n_jobs)
 y_pred = grid_search.best_estimator_.predict(X_test)
-
+precision = precision_score(y_test, y_pred, average='binary')
+accuracy = accuracy_score(y_test, y_pred)
 
 conf_mat = confusion_matrix(y_test, y_pred)
 cm_plot_filename_norm = Path(dir_to_saved_data, pipeline_type + "_norm_confusion.png")
@@ -199,6 +202,9 @@ df_results.to_csv(Path(dir_to_saved_data, "cv_results_.csv"), index=False)
 
 df_best_params = pd.DataFrame(grid_search.best_params_, index=[0])
 df_best_params.to_csv(Path(dir_to_saved_data, "best_params_.csv"), index=False)
+
+df_test_results = pd.DataFrame({"accuracy": accuracy, "precision": precision}, index=[0])
+df_test_results.to_csv(Path(dir_to_saved_data, "test_results.csv"), index=False)
 
 
 print("Training Model")

@@ -2,13 +2,11 @@
 import json
 import os
 from pathlib import Path
-
 # import re
 import time
 from collections import Counter
 import requests
 from datetime import datetime
-from iso639 import languages
 import pandas as pd
 
 # import spacy
@@ -126,6 +124,7 @@ class Data:
 
 
 def format_scraped_data(json_loan_id, status, unprocessed_vars):
+    from iso639 import languages
 
     # ORIGINAL_LANGUAGE
     english_key = "en"

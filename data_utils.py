@@ -17,9 +17,11 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction import text
 
 # from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -463,6 +465,14 @@ def create_stats_pipeline():
 
 
 def create_pipeline(classifier_type, l1_ratio):
+    extra_words = [
+        "translated",
+        "Translated",
+        "original",
+        "language",
+        "volunteer",
+        "description"]
+    my_stop_words = text.ENGLISH_STOP_WORDS.union(extra_words)
     # %% Text Stats Pipelines
     pipe_stats_tag = Pipeline(
         [
@@ -497,10 +507,12 @@ def create_pipeline(classifier_type, l1_ratio):
                 TfidfVectorizer(
                     preprocessor=preprocess_tfidf,
                     ngram_range=(1, 1),
+                    stop_words=my_stop_words,
                     stop_words="english",
                     sublinear_tf=True,
-                    norm="l2",
-                    # max_features=100000,
+                    strip_accents='unicode',
+                    norm="l1",
+                    max_features=100000,
                 ),
             ),
         ]
@@ -513,10 +525,12 @@ def create_pipeline(classifier_type, l1_ratio):
                 TfidfVectorizer(
                     preprocessor=preprocess_tfidf,
                     ngram_range=(1, 1),
+                    stop_words=my_stop_words,
                     stop_words="english",
                     sublinear_tf=True,
-                    norm="l2",
-                    # max_features=100000,
+                    strip_accents='unicode',
+                    norm="l1",
+                    max_features=100000,
                 ),
             ),
         ]
@@ -529,10 +543,12 @@ def create_pipeline(classifier_type, l1_ratio):
                 TfidfVectorizer(
                     preprocessor=preprocess_tfidf,
                     ngram_range=(1, 1),
+                    stop_words=my_stop_words,
                     stop_words="english",
                     sublinear_tf=True,
-                    norm="l2",
-                    # max_features=100000,
+                    strip_accents='unicode',
+                    norm="l1",
+                    max_features=100000,
                 ),
             ),
         ]

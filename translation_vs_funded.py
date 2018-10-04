@@ -129,7 +129,7 @@ sns.set_style(
         "axes.spines.left": False,
         "axes.grid": False,},)
 fig_dpi = 400
-fig_size = (3.5, 1.75)
+fig_size = (4.5, 2.5)
 
 plt.figure(figsize=fig_size)
 plt.rcParams['font.family'] = 'sans-serif'
@@ -138,17 +138,17 @@ cnt_plot1 = sns.barplot(y="ORIGINAL_LANGUAGE", x="percent_not_funded", data=df_l
 for p in cnt_plot1.patches:
              cnt_plot1.annotate("%.1f" % p.get_width(), (p.get_width(), p.get_y() + p.get_height() / 2.),
                  ha='center', va='center', fontsize=11, color='white', xytext=(-11, 0),
-                 textcoords='offset points')
+                 textcoords='offset points', weight='semibold')
 
 # for index, row in df_lang.iterrows():
 #     print(row.ORIGINAL_LANGUAGE, row.percent_not_funded)
 #     cnt_plot1.text(row.ORIGINAL_LANGUAGE, row.percent_not_funded, str(round(row.percent_not_funded,1)), color='black', ha="center")
 # cnt_plot1.set_xticklabels(cnt_plot1.get_xticklabels(), rotation=0)
-cnt_plot1.figure.tight_layout()
 cnt_plot1.set(xticklabels=[])
 cnt_plot1.set(xlabel="")
 cnt_plot1.set(ylabel="")
 cnt_plot1.set(title="Campaigns Not Funded (%)")
+cnt_plot1.figure.tight_layout()
 fig = cnt_plot1.get_figure()
 fig.savefig("language_not_funded.png", dpi=fig_dpi)
 plt.close()
