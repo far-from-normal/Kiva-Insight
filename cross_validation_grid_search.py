@@ -110,12 +110,11 @@ scoring = {
 # param_grid = [{'clf__alpha': [1e-6, 1e-4, 1e-2, 1e0, 1e2],
 #         'clf__l1_ratio': [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]}]
 param_grid = [{'clf__alpha': [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7],
-        'clf__l1_ratio': [0.0, 0.01, 0.1, 0.25, 0.5, 0.75, 1.0]}]
+        'clf__l1_ratio': [0.0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0]}]
 
 # %% ############################
 
 data_par = Data()
-l1_ratio = data_par.l1_ratio
 cols_process = data_par.cols_process
 cols_output = data_par.cols_output
 valid_status = data_par.valid_status

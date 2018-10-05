@@ -119,10 +119,6 @@ class Data:
         self.prediction_model = ["lr", "enet", "rf"]
         self.prediction_model = self.prediction_model[1]
 
-        self.l1_ratio = [0.0, 0.001, 0.01, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-        self.pred_l1_rat = "" # str(self.l1_ratio[-1]) + "_"
-
-
 def format_scraped_data(json_loan_id, status, unprocessed_vars):
     from iso639 import languages
 

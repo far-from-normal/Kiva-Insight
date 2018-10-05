@@ -132,11 +132,9 @@ def predict_prob():
     dir_to_query_data = data_par.dir_to_query_data
     pipeline_type = data_par.prediction_model
 
-    pred_l1_rat = data_par.pred_l1_rat
-
     saved_data_dir = Path(dir_to_saved_data)
     # trained_model_filename = saved_data_dir.joinpath(pipeline_type + "_model.pkl")
-    trained_model_filename = saved_data_dir.joinpath(pipeline_type + "_" + pred_l1_rat + "model.pkl")
+    trained_model_filename = saved_data_dir.joinpath(pipeline_type + "_model.pkl")
     pipeline = joblib.load(trained_model_filename)
 
     # %%
@@ -166,7 +164,6 @@ def plot_factors(loan_id):
 
     predict = True
     N_top_features = 6
-    pred_l1_rat = data_par.pred_l1_rat
 
     scraped_filename = Path(
         dir_to_query_data, "predict_scraped.csv"
@@ -187,7 +184,7 @@ def plot_factors(loan_id):
         dir_to_saved_data, "funded_stats_tags_df.csv"
     )  # input - mean stats
     coefficient_ranking_filename_tags = Path(
-        dir_to_saved_data, pred_l1_rat + "coefs_stats_df_tags.csv"
+        dir_to_saved_data, "coefs_stats_df_tags.csv"
     )  # input - coefficients
     # output
     predicted_features_filename_tags = str(loan_id) + "_predict_ranked_tags.csv"
@@ -201,7 +198,7 @@ def plot_factors(loan_id):
         dir_to_saved_data, "funded_stats_loanuse_df.csv"
     )  # input - mean stats
     coefficient_ranking_filename_loanuse = Path(
-        dir_to_saved_data, pred_l1_rat + "coefs_stats_df_loanuse.csv"
+        dir_to_saved_data, "coefs_stats_df_loanuse.csv"
     )  # input - coefficients
     # output
     predicted_features_filename_loanuse = str(loan_id) + "_predict_ranked_loanuse.csv"
@@ -215,7 +212,7 @@ def plot_factors(loan_id):
         dir_to_saved_data, "funded_stats_desc_df.csv"
     )  # input - mean stats
     coefficient_ranking_filename_desc = Path(
-        dir_to_saved_data, pred_l1_rat + "coefs_stats_df_desc.csv"
+        dir_to_saved_data, "coefs_stats_df_desc.csv"
     )  # input - coefficients
     # output
     predicted_features_filename_desc = str(loan_id) + "_predict_ranked_desc.csv"
@@ -480,7 +477,7 @@ def plot_factors(loan_id):
         loc="upper center",
         ncol=3,
         title=None,
-        bbox_to_anchor=ax.set(xlim=(0, 1)),
+        bbox_to_anchor=legend_coods_loanuse,
         frameon=False,
     )
     fig = sns_factor.get_figure()

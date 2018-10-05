@@ -81,7 +81,7 @@ def save_transformed_stats(dir_to_saved_data, stats_df, csv_df_name):
     return None
 
 
-def save_coefs(pipeline, dir_to_saved_data, classifier_type, l1_ratio_str):
+def save_coefs(pipeline, dir_to_saved_data, classifier_type):
 
     # %% get feature names
     feature_named_steps = pipeline.named_steps["features"].named_steps["feats"]
@@ -146,9 +146,9 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type, l1_ratio_str):
         num_coef = np.size(coefs)
         num_coef_0_ratio = num_coef_0 / num_coef
         print("######### Num coefs == 0:  ", num_coef_0, num_coef, num_coef_0_ratio)
-        df_regularize = pd.DataFrame({"L1 ratio": l1_ratio_str[:-1], "Number of coefficients": [num_coef], "Number of zero coefficients": [num_coef_0], "Ratio of zero": [100.0*num_coef_0_ratio]})
+        df_regularize = pd.DataFrame({"Number of coefficients": [num_coef], "Number of zero coefficients": [num_coef_0], "Ratio of zero": [100.0*num_coef_0_ratio]})
         df_regularize.to_csv(
-            Path(dir_to_saved_data, l1_ratio_str + "coefs_regularized.csv"), index=False
+            Path(dir_to_saved_data, "coefs_regularized.csv"), index=False
         )
 
     coefs_stats_tags = coefs[idx_first[0] : idx_last[0]]
@@ -185,22 +185,22 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type, l1_ratio_str):
     coefs_tfidf_df_desc.sort_values("coefs", inplace=True, ascending=False)
     # write dataframes
     coefs_stats_df_tags.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_stats_df_tags.csv"), index=False
+        Path(dir_to_saved_data, "coefs_stats_df_tags.csv"), index=False
     )
     coefs_stats_df_loanuse.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_stats_df_loanuse.csv"), index=False
+        Path(dir_to_saved_data, "coefs_stats_df_loanuse.csv"), index=False
     )
     coefs_stats_df_desc.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_stats_df_desc.csv"), index=False
+        Path(dir_to_saved_data, "coefs_stats_df_desc.csv"), index=False
     )
     coefs_tfidf_df_tags.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_tfidf_df_tags.csv"), index=False
+        Path(dir_to_saved_data, "coefs_tfidf_df_tags.csv"), index=False
     )
     coefs_tfidf_df_loanuse.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_tfidf_df_loanuse.csv"), index=False
+        Path(dir_to_saved_data, "coefs_tfidf_df_loanuse.csv"), index=False
     )
     coefs_tfidf_df_desc.to_csv(
-        Path(dir_to_saved_data, l1_ratio_str + "coefs_tfidf_df_desc.csv"), index=False
+        Path(dir_to_saved_data, "coefs_tfidf_df_desc.csv"), index=False
     )
 
     print("Dimensionality of features:", coefs.shape)
@@ -464,14 +464,28 @@ def create_stats_pipeline():
     return pipe_stats_tag, pipe_stats_loanuse, pipe_stats_desc
 
 
-def create_pipeline(classifier_type, l1_ratio):
+def create_pipeline(classifier_type):
     extra_words = [
         "translated",
         "Translated",
         "original",
         "language",
         "volunteer",
-        "description"]
+        "description",
+        "br",
+        "nwtf",
+        "php",
+        "murabaha"
+        "murabaha",
+        "spanish",
+        "russian",
+        "portugese",
+        "murabaha",
+        "cusco",
+        "mujeres",
+        "dtm",
+        "french",
+        "english"]
     my_stop_words = text.ENGLISH_STOP_WORDS.union(extra_words)
     # %% Text Stats Pipelines
     pipe_stats_tag = Pipeline(
@@ -511,8 +525,8 @@ def create_pipeline(classifier_type, l1_ratio):
                     # stop_words="english",
                     sublinear_tf=True,
                     strip_accents='unicode',
-                    norm="l1",
-                    max_features=100000,
+                    norm="l2",
+                    # max_features=100000,
                 ),
             ),
         ]
@@ -529,8 +543,8 @@ def create_pipeline(classifier_type, l1_ratio):
                     # stop_words="english",
                     sublinear_tf=True,
                     strip_accents='unicode',
-                    norm="l1",
-                    max_features=100000,
+                    norm="l2",
+                    # max_features=100000,
                 ),
             ),
         ]
@@ -547,8 +561,8 @@ def create_pipeline(classifier_type, l1_ratio):
                     # stop_words="english",
                     sublinear_tf=True,
                     strip_accents='unicode',
-                    norm="l1",
-                    max_features=100000,
+                    norm="l2",
+                    # max_features=100000,
                 ),
             ),
         ]
@@ -668,7 +682,6 @@ def create_pipeline(classifier_type, l1_ratio):
                         class_weight="balanced",
                         loss="log",
                         penalty="elasticnet",
-                        l1_ratio=l1_ratio, #0.15
                     ),
                 ),
             ]
