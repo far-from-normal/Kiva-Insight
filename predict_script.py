@@ -1,4 +1,4 @@
-from predict_v2 import scrape_loan_id, predict_prob, plot_factors
+from predict_utils import scrape_loan_id, predict_prob, plot_factors
 
 loan_id = 1613698
 request_sucess, status = scrape_loan_id(loan_id)

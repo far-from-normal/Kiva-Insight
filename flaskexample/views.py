@@ -1,7 +1,7 @@
 from flask import render_template, request, session, make_response
 from flaskexample import app
 
-from predict_flask_week3 import predict_flask
+from predict_production import predict_flask
 
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 

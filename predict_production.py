@@ -1,4 +1,4 @@
-from predict_v2 import scrape_loan_id, predict_prob, plot_factors
+from predict_utils import scrape_loan_id, predict_prob, plot_factors
 
 
 def predict_flask(loan_url_):
