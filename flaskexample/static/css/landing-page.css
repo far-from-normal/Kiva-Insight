@@ -5,7 +5,8 @@
  */
 
 body {
-  font-family: 'Plex', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* font-family: 'IBM Plex Sans', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h1,
@@ -14,7 +15,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Plex', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* font-family: 'IBM Plex Sans', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
 }
 
@@ -27,8 +29,8 @@ header.masthead {
   padding-bottom: 8rem;
 }
 
-header.masthead .overlay {
-  position: absolute;
+header.masthead .overlay
+{  position: absolute;
   background-color: #212529;
   height: 100%;
   width: 100%;

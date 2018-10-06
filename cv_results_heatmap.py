@@ -24,7 +24,7 @@ result_accuracy = result_accuracy.pivot(index='param_clf__alpha', columns='param
 # cmap = sns.diverging_palette(150, 275, s=80, l=55, as_cmap=True)
 
 fig_dpi = 400
-fig_size = (8, 5.5`)
+fig_size = (8, 5.5)
 plt.figure(figsize=fig_size)
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.sans-serif'] = 'Arial'
@@ -38,17 +38,7 @@ plt.close()
 
 
 
-fig_dpi = 400
-fig_size = (4, 4)
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-ax = sns.heatmap(result_accuracy, annot=True, fmt=".4f", cmap='viridis', square=True)
-ax.set(ylabel="Regualization (alpha = 1/C)")
-fig = ax.get_figure()
-fig.savefig("hyperparameter_heatmap_accuracy.png", dpi=fig_dpi)
-plt.close()
-# sns.set()
+
 
 #
 #

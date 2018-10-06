@@ -107,8 +107,6 @@ scoring = {
     # "roc_auc": "roc_auc",
 }
 
-# param_grid = [{'clf__alpha': [1e-6, 1e-4, 1e-2, 1e0, 1e2],
-#         'clf__l1_ratio': [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]}]
 param_grid = [{'clf__alpha': [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7],
         'clf__l1_ratio': [0.0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0]}]
 
@@ -125,7 +123,7 @@ path_to_training_data = data_par.path_to_training_data
 
 predict = False
 num_cv = 5
-n_jobs = 15
+n_jobs = 20
 verbose = 20
 refit = "precision"
 downsample_rate = 1
@@ -152,7 +150,7 @@ start = time()
 
 # %%
 
-pipeline = create_pipeline(pipeline_type, 0)
+pipeline = create_pipeline(pipeline_type)
 
 grid_search = GridSearchCV(
     pipeline,
@@ -175,6 +173,9 @@ print("Testing Model")
 y_pred = grid_search.best_estimator_.predict(X_test)
 precision = precision_score(y_test, y_pred, average='binary')
 accuracy = accuracy_score(y_test, y_pred)
+
+df_test_pred = pd.DataFrame({"test": y_test, "pred": y_pred})
+df_test_pred.to_csv(Path(dir_to_saved_data, "y_test_y_pred.csv"), index=False)
 
 conf_mat = confusion_matrix(y_test, y_pred)
 cm_plot_filename_norm = Path(dir_to_saved_data, pipeline_type + "_norm_confusion.png")
@@ -210,7 +211,7 @@ print("Training Model")
 # pipeline.fit(df[cols_X], labels)
 path_to_saved_model = Path(dir_to_saved_data, pipeline_type + "_model.pkl")
 joblib.dump(grid_search.best_estimator_, path_to_saved_model)
-save_coefs(grid_search.best_estimator_, dir_to_saved_data, pipeline_type, "_")
+save_coefs(grid_search.best_estimator_, dir_to_saved_data, pipeline_type)
 
 stop = time()
 print(stop - start)

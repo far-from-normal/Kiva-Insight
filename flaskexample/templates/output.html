@@ -10,17 +10,17 @@
 
     <title>Opt4Kiva | Maximize your chances of funding your Kiva loan!</title>
 
-    <!-- Bootstrap core CSS -->
+	<!-- Bootstrap core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-	<!-- <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet"> -->
-
 	<!-- Custom styles for this template -->
-    <link href="../static/css/landing-page.min.css" rel="stylesheet">
+	<link href="../static/css/landing-page.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <!-- <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+	<link href="../static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet" type="text/css">
 
   </head>
 
@@ -41,9 +41,9 @@
         <div class="row">
 			<div class="col-xl-9 mx-auto">
 			  <h1 class="mb-5">Chance of success</h1>
-			  <h4 class="mb-5">Your campaign ({{loan_url_}}) has been analyzed.<br>The chance of this loan being successfully funded is</h4>
+			  <p class="lead mb-0"><strong>Your campaign ({{loan_url_}}) has been analyzed.<br>The chance of this loan being successfully funded is</strong></p>
 			  <!-- <p class="lead mb-0">Your campaign ({{loan_url_}}) has been analyzed.<br>The chance of this loan being successfully funded is <br><strong>{{the_result}}.</strong></p> -->
-			  <h2 class="mb-5"><br><strong>{{the_result}}.</strong></h2>
+			  <h1 class="mb-5"><br>{{the_result}}</h1>
 			</div>
         </div>
       </div>
@@ -54,6 +54,7 @@
       <div class="container">
             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
 			  <h3>Top 6 ways to impove your chances at landing your campaign</h3>
+			  <p class="lead mb-0">and see where you rank compared to successful and unsuccessful campaigns.</p>
             </div>
       </div>
     </section>

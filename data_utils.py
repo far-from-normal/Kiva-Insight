@@ -116,13 +116,50 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
         .get_feature_names()
     )
 
+    loan_amount_names = ["loan_amount"]
+    funding_days_names = ["funding_days"]
+    was_translated_names = ["was_translated"]
+
+    sector_code_names = (
+        feature_named_steps.transformer_list[9][1]
+        .named_steps["onehot"]
+        .get_feature_names()
+    )
+
+    country_code_names = (
+        feature_named_steps.transformer_list[10][1]
+        .named_steps["onehot"]
+        .get_feature_names()
+    )
+
+    original_language_names = (
+        feature_named_steps.transformer_list[11][1]
+        .named_steps["onehot"]
+        .get_feature_names()
+    )
+
     n_stats_tags = len(stats_names_tags)
     n_stats_loanuse = len(stats_names_loanuse)
     n_stats_desc = len(stats_names_desc)
     n_tfidf_tags = len(tfidf_names_tags)
     n_tfidf_loanuse = len(tfidf_names_loanuse)
     n_tfidf_desc = len(tfidf_names_desc)
+    n_loan_amount = len(loan_amount_names)
+    n_funding_days = len(funding_days_names)
+    n_was_translated = len(was_translated_names)
+    n_sector_code = len(sector_code_names)
+    n_country_code = len(country_code_names)
+    n_original_language = len(original_language_names)
 
+    # n_feat_cumsum = [
+    #     0,
+    #     n_stats_tags,
+    #     n_stats_loanuse,
+    #     n_stats_desc,
+    #     n_tfidf_tags,
+    #     n_tfidf_loanuse,
+    #     n_tfidf_desc,
+    # ]
     n_feat_cumsum = [
         0,
         n_stats_tags,
@@ -131,6 +168,12 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
         n_tfidf_tags,
         n_tfidf_loanuse,
         n_tfidf_desc,
+        n_loan_amount,
+        n_funding_days,
+        n_was_translated,
+        n_sector_code,
+        n_country_code,
+        n_original_language,
     ]
     n_feat_cumsum = np.array(n_feat_cumsum).cumsum()
     idx_first = n_feat_cumsum[:-1].tolist()
@@ -157,6 +200,13 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     coefs_tfidf_tags = coefs[idx_first[3] : idx_last[3]]
     coefs_tfidf_loanuse = coefs[idx_first[4] : idx_last[4]]
     coefs_tfidf_desc = coefs[idx_first[5] : idx_last[5]]
+    coefs_loan_amount = coefs[idx_first[6] : idx_last[6]]
+    coefs_funding_days = coefs[idx_first[7] : idx_last[7]]
+    coefs_was_translated = coefs[idx_first[8] : idx_last[8]]
+    coefs_sector_code = coefs[idx_first[9] : idx_last[9]]
+    coefs_country_code = coefs[idx_first[10] : idx_last[10]]
+    coefs_original_language = coefs[idx_first[11] : idx_last[11]]
+
     # make dataframes
     coefs_stats_df_tags = pd.DataFrame(
         {"stats_names": stats_names_tags, "coefs": coefs_stats_tags}
@@ -176,6 +226,25 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     coefs_tfidf_df_desc = pd.DataFrame(
         {"tfidf_names": tfidf_names_desc, "coefs": coefs_tfidf_desc}
     )
+    coefs_df_loan_amount = pd.DataFrame(
+        {"loan_amount_names": loan_amount_names, "coefs": coefs_loan_amount}
+    )
+    coefs_df_funding_days = pd.DataFrame(
+        {"funding_days_names": funding_days_names, "coefs": coefs_funding_days}
+    )
+    coefs_df_was_translated = pd.DataFrame(
+        {"was_translated_names": was_translated_names, "coefs": coefs_was_translated}
+    )
+    coefs_df_sector_code = pd.DataFrame(
+        {"sector_code_names": sector_code_names, "coefs": coefs_sector_code}
+    )
+    coefs_df_country_code = pd.DataFrame(
+        {"country_code_names": country_code_names, "coefs": coefs_country_code}
+    )
+    coefs_df_original_language = pd.DataFrame(
+        {"original_language_names": original_language_names, "coefs": coefs_original_language}
+    )
+
     # sort dataframes
     coefs_stats_df_tags.sort_values("coefs", inplace=True, ascending=False)
     coefs_stats_df_loanuse.sort_values("coefs", inplace=True, ascending=False)
@@ -183,6 +252,12 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     coefs_tfidf_df_tags.sort_values("coefs", inplace=True, ascending=False)
     coefs_tfidf_df_loanuse.sort_values("coefs", inplace=True, ascending=False)
     coefs_tfidf_df_desc.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_loan_amount.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_funding_days.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_was_translated.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_sector_code.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_country_code.sort_values("coefs", inplace=True, ascending=False)
+    coefs_df_original_language.sort_values("coefs", inplace=True, ascending=False)
     # write dataframes
     coefs_stats_df_tags.to_csv(
         Path(dir_to_saved_data, "coefs_stats_df_tags.csv"), index=False
@@ -201,6 +276,25 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     )
     coefs_tfidf_df_desc.to_csv(
         Path(dir_to_saved_data, "coefs_tfidf_df_desc.csv"), index=False
+    )
+
+    coefs_df_loan_amount.to_csv(
+        Path(dir_to_saved_data, "coefs_df_loan_amount.csv"), index=False
+    )
+    coefs_df_funding_days.to_csv(
+        Path(dir_to_saved_data, "coefs_df_funding_days.csv"), index=False
+    )
+    coefs_df_was_translated.to_csv(
+        Path(dir_to_saved_data, "coefs_df_was_translated.csv"), index=False
+    )
+    coefs_df_sector_code.to_csv(
+        Path(dir_to_saved_data, "coefs_df_sector_code.csv"), index=False
+    )
+    coefs_df_country_code.to_csv(
+        Path(dir_to_saved_data, "coefs_df_country_code.csv"), index=False
+    )
+    coefs_df_original_language.to_csv(
+        Path(dir_to_saved_data, "coefs_df_original_language.csv"), index=False
     )
 
     print("Dimensionality of features:", coefs.shape)
@@ -667,7 +761,7 @@ def create_pipeline(classifier_type):
                 (
                     "clf",
                     LogisticRegression(
-                        class_weight="balanced", solver="saga"  # "liblinear" "saga"
+                        class_weight="balanced", solver="saga"
                     ),
                 ),
             ]
