@@ -277,7 +277,6 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     coefs_tfidf_df_desc.to_csv(
         Path(dir_to_saved_data, "coefs_tfidf_df_desc.csv"), index=False
     )
-
     coefs_df_loan_amount.to_csv(
         Path(dir_to_saved_data, "coefs_df_loan_amount.csv"), index=False
     )

@@ -8,6 +8,7 @@ python -m spacy download en_core_web_md
 python -m spacy download en_core_web_lg
 python -m spacy download en_vectors_web_lg
 pip install iso-639
+pip install pycountry
 conda install -c conda-forge imbalanced-learn
 conda install -c conda-forge lightgbm
 ```

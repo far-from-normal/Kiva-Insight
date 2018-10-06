@@ -3,37 +3,20 @@ import numpy as np
 import itertools
 from time import time
 from pathlib import Path
-
-import warnings
-# warnings.filterwarnings("ignore", category=FutureWarning)
-# warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.simplefilter(action='ignore', category=FutureWarning)
-warnings.simplefilter(action='ignore', category=DeprecationWarning)
-# warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
-
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-
-import seaborn as sns
-
 from sklearn.externals import joblib
-
 from sklearn.model_selection import GridSearchCV
-
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-from sklearn.metrics import roc_auc_score
+# from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelBinarizer
-from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_validate
-from sklearn.model_selection import cross_val_predict
-from sklearn import metrics
-
 from data_utils import preprocess_train_df, save_coefs, create_pipeline
 from data_params import Data
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use("Agg")
+
 
 
 def plot_confusion_matrix(
