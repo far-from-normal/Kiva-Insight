@@ -24,8 +24,16 @@ def predict_flask(loan_url_):
             tags_text_hashtags,
         ) = plot_factors(loan_id)
     else:
-        success_percent = status
-        img_name_1, img_name_2, img_name_3 = (
+        (success_percent,
+        img_name_1,
+        img_name_2,
+        img_name_3,
+        desc_text_words,
+        desc_text_sentences,
+        desc_text_paragraphs,
+        loanuse_text_words,
+        tags_text_words,
+        tags_text_hashtags) = (
             None,
             None,
             None,
@@ -39,6 +47,7 @@ def predict_flask(loan_url_):
         )
 
     return (
+        status,
         success_percent,
         img_name_1,
         img_name_2,
