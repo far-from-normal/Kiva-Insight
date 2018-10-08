@@ -18,7 +18,7 @@ This dataset provided by the URL (http://s3.kiva.org/snapshots/kiva_ds_csv.zip) 
 
 Extract 'loans.csv' and place it in the project's root directory.
 
-[//]: # (
+<!--
 ## Comments on the data
 
 I chose to model the data using two different algorithms since we do not know whether the decision boundary is linear or non-linear: logistic regression and random forest. Since the dataset is imbalanced (5.15% monthly churn), I chose to train by optimizing the F1-score instead of accuracy.
@@ -36,7 +36,8 @@ Logisitic regression classifier:
 
 Random forest classifier:
 ![img2](plots/random_forest_confusion_matrix.png)
-)
+
+-->
 
 ## Authors
 
