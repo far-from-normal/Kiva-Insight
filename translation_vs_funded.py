@@ -12,8 +12,6 @@ sns.set(style="darkgrid")
 
 from data_utils import (
     preprocess_train_df,
-    # fit_stats,
-    # transform_stats,
     save_transformed_stats)
 
 def summarize_stats(csv_name, dir_to_data, stat_name_select):
@@ -139,10 +137,7 @@ for p in cnt_plot1.patches:
                  ha='center', va='center', fontsize=11, color='white', xytext=(-11, 0),
                  textcoords='offset points', weight='semibold')
 
-# for index, row in df_lang.iterrows():
-#     print(row.ORIGINAL_LANGUAGE, row.percent_not_funded)
-#     cnt_plot1.text(row.ORIGINAL_LANGUAGE, row.percent_not_funded, str(round(row.percent_not_funded,1)), color='black', ha="center")
-# cnt_plot1.set_xticklabels(cnt_plot1.get_xticklabels(), rotation=0)
+
 cnt_plot1.set(xticklabels=[])
 cnt_plot1.set(xlabel="")
 cnt_plot1.set(ylabel="")

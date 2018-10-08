@@ -3,6 +3,8 @@ import os
 import pandas as pd
 import numpy as np
 from data_params import Data
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from data_utils import (
     preprocess_train_df,
@@ -14,7 +16,56 @@ from data_utils import (
 
 # %%
 
-def text_suggestion(unsuccessful, successful, yours):
+def make_stripplot(fig_size, fig_dpi, legend_coods, marker_size, filename, data, loan_id):
+    current_palette = sns.color_palette("Set1", n_colors=3)
+    current_palette = [current_palette[2], current_palette[0], current_palette[1]]
+    sns.set(font_scale=0.6)
+    sns.set_palette(current_palette)
+    sns.set_style(
+        "white",
+        {
+            "axes.spines.bottom": False,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "axes.spines.left": False,
+            "axes.grid": True,
+        },
+    )
+    plt.figure(figsize=fig_size)
+    sns_factor = sns.stripplot(
+        y="Info",
+        x="Performance",
+        hue="Campaigns",
+        data=data,
+        size=marker_size,
+        marker="D",
+        alpha=.75,
+        dodge=False,
+        jitter=True,
+        orient="v",
+    )
+    sns_factor.set(xticklabels=[])
+    sns_factor.set(xlabel="")
+    sns_factor.set(ylabel="")
+    sns_factor.figure.tight_layout()
+    sns_factor.legend(
+        loc="upper center",
+        ncol=3,
+        title=None,
+        bbox_to_anchor=legend_coods,
+        frameon=False,
+    )
+    fig = sns_factor.get_figure()
+    img_name = str(loan_id) + filename
+    output_image_path_flask = Path("flaskexample", "static", img_name)
+    fig.savefig(output_image_path_flask, dpi=fig_dpi)
+    plt.close()
+    return img_name
+
+def text_suggestion(df, variable):
+    unsuccessful = df.loc[df["Info"] == variable, "Unsuccessful"].values
+    successful = df.loc[df["Info"] == variable, "Successful"].values
+    yours = df.loc[df["Info"] == variable, "Your Campaign"].values
     print(unsuccessful)
     if successful > unsuccessful:
         if yours > successful:
@@ -141,11 +192,6 @@ def predict_prob():
 
 def plot_factors(loan_id):
 
-    import pandas as pd
-    from pathlib import Path
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
     data_par = Data()
     cols_process = data_par.cols_process
     cols_output = data_par.cols_output
@@ -271,72 +317,13 @@ def plot_factors(loan_id):
         top_features_desc["Info"].isin(["num_words", "num_sentences", "num_paragraphs"])
     ]
 
-    desc_text_words = text_suggestion(
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_words", "Unsuccessful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_words", "Successful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_words", "Your Campaign"
-        ].values,
-    )
-    desc_text_sentences = text_suggestion(
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_sentences", "Unsuccessful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_sentences", "Successful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_sentences", "Your Campaign"
-        ].values,
-    )
-    desc_text_paragraphs = text_suggestion(
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_paragraphs", "Unsuccessful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_paragraphs", "Successful"
-        ].values,
-        top_features_desc.loc[
-            top_features_desc["Info"] == "num_paragraphs", "Your Campaign"
-        ].values,
-    )
-    loanuse_text_words = text_suggestion(
-        top_features_loanuse.loc[
-            top_features_loanuse["Info"] == "num_words", "Unsuccessful"
-        ].values,
-        top_features_loanuse.loc[
-            top_features_loanuse["Info"] == "num_words", "Successful"
-        ].values,
-        top_features_loanuse.loc[
-            top_features_loanuse["Info"] == "num_words", "Your Campaign"
-        ].values,
-    )
-    tags_text_words = text_suggestion(
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_words", "Unsuccessful"
-        ].values,
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_words", "Successful"
-        ].values,
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_words", "Your Campaign"
-        ].values,
-    )
-    tags_text_hashtags = text_suggestion(
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_hashtags", "Unsuccessful"
-        ].values,
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_hashtags", "Successful"
-        ].values,
-        top_features_tags.loc[
-            top_features_tags["Info"] == "num_hashtags", "Your Campaign"
-        ].values,
-    )
+    # make suggestion
+    desc_text_words = text_suggestion(top_features_desc, "num_words")
+    desc_text_sentences = text_suggestion(top_features_desc, "num_sentences")
+    desc_text_paragraphs = text_suggestion(top_features_desc, "num_paragraphs")
+    loanuse_text_words = text_suggestion(top_features_loanuse, "num_words")
+    tags_text_words = text_suggestion(top_features_tags, "num_words")
+    tags_text_hashtags = text_suggestion(top_features_tags, "num_words")
 
     top_features_tags = top_features_tags.replace(
         {"num_words": "number of words", "num_hashtags": "number of hashtags"}
@@ -375,28 +362,9 @@ def plot_factors(loan_id):
         value_name="Performance",
     )
 
-    # fig params
-    current_palette = sns.color_palette("Set1")
-    current_palette = [current_palette[2], current_palette[0], current_palette[1]]
-
-    sns.set(font_scale=0.6)
-    sns.set_palette(current_palette)
-    # sns.set(style="white", font_scale=2)
-    sns.set_style(
-        "white",
-        {
-            "axes.spines.bottom": False,
-            "axes.spines.top": False,
-            "axes.spines.right": False,
-            "axes.spines.left": False,
-            "axes.grid": True,
-        },
-    )
-    # sns.axes_style(grid=False)
-    # sns.despine()
     fig_dpi = 400
-    fig_size = (3.5, 1.75)
     marker_size = 7
+
     legend_coods_tags = (0.3, 1.45)
     legend_coods_loanuse = (0.3, 1.65)
     legend_coods_desc = (0.3, 1.35)
@@ -405,115 +373,14 @@ def plot_factors(loan_id):
     fig_size_loanuse = (3.5, 0.65)
     fig_size_desc = (3.5, 1)
 
-    # tags
-    plt.figure(figsize=fig_size_tags)
-    sns_factor = sns.stripplot(
-        y="Info",
-        x="Performance",
-        hue="Campaigns",
-        data=top_features_long_tags,
-        size=marker_size,
-        marker="D",
-        alpha=.75,
-        dodge=False,
-        jitter=True,
-        orient="v",
-        # height=10,
-        # aspect=1.2,
-        # marker='D'
-    )
-    sns_factor.set(xticklabels=[])
-    # sns_factor.set(xticks=[])
-    sns_factor.set(xlabel="")
-    sns_factor.set(ylabel="")
-    # ax.grid(b=True, which='major', color='w', linewidth=1.0)
-    sns_factor.figure.tight_layout()
-    sns_factor.legend(
-        loc="upper center",
-        ncol=3,
-        title=None,
-        bbox_to_anchor=legend_coods_tags,
-        frameon=False,
-    )
-    fig = sns_factor.get_figure()
-    # fig = plt.gcf()
-    # fig = sns_factor.fig
-    img_name_tags = str(loan_id) + "Campaign_tags.png"
-    output_image_path_flask1 = Path("flaskexample", "static", img_name_tags)
-    fig.savefig(output_image_path_flask1, dpi=fig_dpi)
-    plt.close()
+    img_name_tags = make_stripplot(fig_size_tags, fig_dpi, legend_coods_tags, marker_size,
+        "Campaign_tags.png", top_features_long_tags, loan_id)
+    img_name_loanuse = make_stripplot(fig_size_loanuse, fig_dpi, legend_coods_loanuse, marker_size,
+        "Campaign_loanuse.png", top_features_long_loanuse, loan_id)
+    img_name_desc = make_stripplot(fig_size_desc, fig_dpi, legend_coods_desc, marker_size,
+        "Campaign_desc.png", top_features_long_desc, loan_id)
 
-    # loanuse
-    plt.figure(figsize=fig_size_loanuse)
-    sns_factor = sns.stripplot(
-        y="Info",
-        x="Performance",
-        hue="Campaigns",
-        data=top_features_long_loanuse,
-        size=marker_size,
-        marker="D",
-        alpha=.75,
-        dodge=False,
-        jitter=True,
-        orient="v",
-        # height=10,
-        # aspect=1.2,
-        # marker='D'
-    )
-    sns_factor.set(xticklabels=[])
-    # sns_factor.set(xticks=[])
-    sns_factor.set(xlabel="")
-    sns_factor.set(ylabel="")
-    # ax.grid(b=True, which='major', color='w', linewidth=1.0)
-    sns_factor.figure.tight_layout()
-    sns_factor.legend(
-        loc="upper center",
-        ncol=3,
-        title=None,
-        bbox_to_anchor=legend_coods_loanuse,
-        frameon=False,
-    )
-    fig = sns_factor.get_figure()
-    img_name_loanuse = str(loan_id) + "Campaign_loanuse.png"
-    output_image_path_flask1 = Path("flaskexample", "static", img_name_loanuse)
-    fig.savefig(output_image_path_flask1, dpi=fig_dpi)
-    plt.close()
 
-    # desc
-    plt.figure(figsize=fig_size_desc)
-    sns_factor = sns.stripplot(
-        y="Info",
-        x="Performance",
-        hue="Campaigns",
-        data=top_features_long_desc,
-        size=marker_size,
-        marker="D",
-        alpha=.75,
-        dodge=False,
-        jitter=True,
-        orient="v",
-        # height=10,
-        # aspect=1.2,
-        # marker='D'
-    )
-    sns_factor.set(xticklabels=[])
-    sns_factor.set(xlabel="")
-    sns_factor.set(ylabel="")
-    sns_factor.figure.tight_layout()
-    sns_factor.legend(
-        loc="upper center",
-        ncol=3,
-        title=None,
-        bbox_to_anchor=legend_coods_desc,
-        frameon=False,
-    )
-    fig = sns_factor.get_figure()
-    img_name_desc = str(loan_id) + "Campaign_desc.png"
-    output_image_path_flask1 = Path("flaskexample", "static", img_name_desc)
-    fig.savefig(output_image_path_flask1, dpi=fig_dpi)
-    plt.close()
-
-    # return None
     return (
         img_name_desc,
         img_name_loanuse,
