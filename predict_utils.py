@@ -118,12 +118,6 @@ def predict_prob():
 
     from sklearn.externals import joblib
 
-    # from sklearn.pipeline import Pipeline
-    # from sklearn.linear_model import LogisticRegression
-    # from sklearn.linear_model import SGDClassifier
-    # from sklearn.ensemble import RandomForestClassifier
-    # import lightgbm as lgbm
-
     data_par = Data()
     cols_process = data_par.cols_process
     cols_output = data_par.cols_output
@@ -133,7 +127,6 @@ def predict_prob():
     pipeline_type = data_par.prediction_model
 
     saved_data_dir = Path(dir_to_saved_data)
-    # trained_model_filename = saved_data_dir.joinpath(pipeline_type + "_model.pkl")
     trained_model_filename = saved_data_dir.joinpath(pipeline_type + "_model.pkl")
     pipeline = joblib.load(trained_model_filename)
 

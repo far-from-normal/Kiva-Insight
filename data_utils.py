@@ -29,14 +29,6 @@ from sklearn.externals import joblib
 
 
 def preprocess_train_df(df, valid_status, cols_output, predict=False):
-    # moving empty DESCRIPTION_TRANSLATED from DESCRIPTION if DESCRIPTION_TRANSLATED is empty
-    # df["DESCRIPTION_TRANSLATED"].fillna(df["DESCRIPTION"], inplace=True)
-    # # converting NaN entries to empty strings
-    # df["DESCRIPTION_TRANSLATED"].fillna("", inplace=True)
-    # df["LOAN_USE"].fillna("", inplace=True)
-    # df["TAGS"].fillna("", inplace=True)
-    # df["SECTOR_NAME"].fillna("", inplace=True)
-    # df["COUNTRY_CODE"].fillna("", inplace=True)
 
     df.loc[:, "DESCRIPTION_TRANSLATED"].fillna(df.loc[:, "DESCRIPTION"], inplace=True)
     # converting NaN entries to empty strings
@@ -151,15 +143,6 @@ def save_coefs(pipeline, dir_to_saved_data, classifier_type):
     n_country_code = len(country_code_names)
     n_original_language = len(original_language_names)
 
-    # n_feat_cumsum = [
-    #     0,
-    #     n_stats_tags,
-    #     n_stats_loanuse,
-    #     n_stats_desc,
-    #     n_tfidf_tags,
-    #     n_tfidf_loanuse,
-    #     n_tfidf_desc,
-    # ]
     n_feat_cumsum = [
         0,
         n_stats_tags,

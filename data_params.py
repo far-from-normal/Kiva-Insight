@@ -107,6 +107,8 @@ class Data:
             "WAS_TRANSLATED",
         ]
 
+        self.col_label = "STATUS"
+
         self.valid_status = ["expired", "funded"]
 
         self.dir_to_saved_data = "saved_data"
