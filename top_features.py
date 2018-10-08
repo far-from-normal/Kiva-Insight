@@ -8,6 +8,18 @@ matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
 import seaborn as sns
 import pycountry
 
+def coef_bar_plot(data, y, filename, fig_size, fig_dpi):
+    plt.figure(figsize=fig_size)
+    plt.rcParams['font.family'] = 'sans-serif'
+    plt.rcParams['font.sans-serif'] = 'Arial'
+    coef_plot = sns.barplot(y=y, x="coefs", data=data, palette=("Greens_r"))
+    coef_plot.set(xlabel="")
+    coef_plot.set(ylabel="")
+    coef_plot.figure.tight_layout()
+    fig = coef_plot.get_figure()
+    fig.savefig(filename, dpi=fig_dpi)
+    plt.close()
+    return None
 
 
 # %% ###########
@@ -74,159 +86,22 @@ fig_size = (4.5, 2.5)
 
 
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="stats_names", x="coefs", data=stats_desc, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_stats_desc.png", dpi=fig_dpi)
-plt.close()
-
-
-
+coef_bar_plot(stats_desc, "stats_names", "top_features_stats_desc.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="stats_names", x="coefs", data=stats_loanuse, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_stats_loanuse.png", dpi=fig_dpi)
-plt.close()
-
-
-
-
+coef_bar_plot(stats_loanuse, "stats_names", "top_features_stats_loanuse.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="stats_names", x="coefs", data=stats_tags, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_stats_tags.png", dpi=fig_dpi)
-plt.close()
-
-
-
+coef_bar_plot(stats_tags, "stats_names", "top_features_stats_tags.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="tfidf_names", x="coefs", data=words_desc, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_words_desc.png", dpi=fig_dpi)
-plt.close()
-
-
-
-
+coef_bar_plot(words_desc, "tfidf_names", "top_features_words_desc.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="tfidf_names", x="coefs", data=words_loanuse, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_words_loanuse.png", dpi=fig_dpi)
-plt.close()
-
-
-
-
-
+coef_bar_plot(words_loanuse, "tfidf_names", "top_features_words_loanuse.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="tfidf_names", x="coefs", data=words_tags, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_words_tags.png", dpi=fig_dpi)
-plt.close()
-
-
+coef_bar_plot(words_tags, "tfidf_names", "top_features_words_tags.png", fig_size, fig_dpi)
 ###########################
+coef_bar_plot(numerical_vars, "feature_names", "top_features_numerical_vars.png", fig_size, fig_dpi)
 ###########################
+coef_bar_plot(sector_code, "sector_code_names", "top_features_sector_code.png", fig_size, fig_dpi)
 ###########################
+coef_bar_plot(country_code, "country_names", "top_features_country_code.png", fig_size, fig_dpi)
 ###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="feature_names", x="coefs", data=numerical_vars, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_numerical_vars.png", dpi=fig_dpi)
-plt.close()
-
-
-
-###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="sector_code_names", x="coefs", data=sector_code, palette=("Greens_r"))
-# cnt_plot1.set(xticklabels=[])
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_sector_code.png", dpi=fig_dpi)
-plt.close()
-
-
-
-
-###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="country_names", x="coefs", data=country_code, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_country_code.png", dpi=fig_dpi)
-plt.close()
-
-
-
-
-###########################
-
-plt.figure(figsize=fig_size)
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = 'Arial'
-cnt_plot1 = sns.barplot(y="original_language_names", x="coefs", data=original_language, palette=("Greens_r"))
-cnt_plot1.set(xlabel="")
-cnt_plot1.set(ylabel="")
-cnt_plot1.figure.tight_layout()
-fig = cnt_plot1.get_figure()
-fig.savefig("top_features_original_language.png", dpi=fig_dpi)
-plt.close()
+coef_bar_plot(original_language, "original_language_names", "top_features_original_language.png", fig_size, fig_dpi)
