@@ -107,6 +107,8 @@ venv.bak/
 # dev-specific
 /other
 /saved_data
+/Notes
 *.pkl
 *.csv
 *.png
+*.DS_Store
