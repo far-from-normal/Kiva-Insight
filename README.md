@@ -32,7 +32,7 @@ Before running any code, create the directories 'saved_data' and 'queries' in th
 
 To run the hyperparameter grid search, in a terminal `cd` into the working directory of the project, then type:
 
-```console
+```bash
 working_dir_project$ python cross_validation_grid_search.py
 ```
 
@@ -40,7 +40,7 @@ working_dir_project$ python cross_validation_grid_search.py
 
 To generate the statistics for features of interest, required for the web app, type:
 
-```console
+```bash
 $ python funded_stat.py
 ```
 
@@ -48,7 +48,7 @@ $ python funded_stat.py
 
 To generate the grid search results plots and the confusion matrix plot from the test data, type:
 
-```console
+```bash
 $ python cv_results_heatmap.py
 ```
 
@@ -56,7 +56,7 @@ $ python cv_results_heatmap.py
 
 To generate plots for the feature ranking, type:
 
-```console
+```bash
 $ python top_features.py
 ```
 
@@ -64,7 +64,7 @@ $ python top_features.py
 
 To run the Flask web app locally, type:
 
-```console
+```bash
 $ python run.py
 ```
 
