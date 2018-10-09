@@ -33,7 +33,7 @@ Before running any code, create the directories 'saved_data' and 'queries' in th
 To run the hyperparameter grid search, in a terminal `cd` into the working directory of the project, then type:
 
 ```bash
-working_dir_project$ python cross_validation_grid_search.py
+$ python cross_validation_grid_search.py
 ```
 
 ### Step 2
