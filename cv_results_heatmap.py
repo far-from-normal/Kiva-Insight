@@ -158,7 +158,7 @@ ax = sns.heatmap(result_precision, annot=True, fmt=".4f", cmap="Greens_r", squar
 # ax.set(xlabel="L2 / ridge = 0             Penalty                  L1 / lasso = 1")
 # ax.set(ylabel="Regualization (alpha = 1/C)")
 plt.xlabel("L2 / ridge = 0             " + r"$\mathbf{Penalty}$" + "                  L1 / lasso = 1", fontsize=16)
-plt.ylabel(r"$\mathbf{Regularization}$" + " (" + r"$\alpha = 1/C$" + ")", fontsize=16)
+plt.ylabel(r"$\mathbf{Regularization\ multiplier}$" + " (" + r"$\alpha$" + ")", fontsize=16)
 fig = ax.get_figure()
 fig.savefig("hyperparameter_heatmap_precision.png", dpi=fig_dpi)
 plt.close()
