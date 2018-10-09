@@ -143,9 +143,8 @@ df_responses = pd.read_csv(path_to_responses)
 print(df_responses.head())
 classes = ["not funded", "funded"]
 conf_mat = confusion_matrix(df_responses["test"], df_responses["pred"])
-# cmap = sns.diverging_palette(150, 275, s=80, l=55, as_cmap=True)
-# cmap = sns.diverging_palette(150, 275, s=80, l=55, as_cmap=True)
 
+# hyperparamter grid search heatmap for precision
 fig_dpi = 400
 fig_size = (8, 5.5)
 plt.figure(figsize=fig_size)
@@ -164,5 +163,5 @@ fig = ax.get_figure()
 fig.savefig("hyperparameter_heatmap_precision.png", dpi=fig_dpi)
 plt.close()
 
-
+# confusion matrix
 print_confusion_matrix(conf_mat, classes, figsize=(8,5.5), fontsize=14)
