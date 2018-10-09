@@ -1,8 +1,12 @@
 # Kiva-Insight
 
-Users on the the crowdfunding microloan funding website Kiva.org, have a 4.6% failure rate in terms of acquiring loan funding. My aim is to help all users improve their chances of being funded, including foreign-speaking users since the loans they are seeking will significantly improve their quality of life. Most loan applicants/users are common people from developing countries or their translators. My solution is a machine learning product that predicts the probability of a crowdfunding loan being successful with logistic regression. It also gives recommendations on how to improve the structure of some the text boxes on the campaign website by ranking their logistic regression coefficients. The product is a website where users of Kiva can enter their crowdfunding URL into a text search box. After pressing on the GO! button, the users are brought to a second page where they are shown the probability of their campaign's success and are also show the top 6 suggestions on how to improve their page layout.
+Users on the the crowdfunding microloan funding website Kiva.org, have a 4.6% failure rate in terms of acquiring loan funding. My aim is to help all users improve their chances of being funded, including foreign-speaking users since the loans they are seeking will significantly improve their quality of life. Most loan applicants/users are common people from developing countries or their translators.
+
+My solution is a machine learning product that predicts the probability of a crowdfunding loan being successful with logistic regression. It also gives recommendations on how to improve the structure of some the text boxes on the campaign website by ranking their logistic regression coefficients.
 
 ![img1](diagram.jpg)
+
+The product is a website where users of Kiva can enter their crowdfunding URL into a text search box. After pressing on the GO! button, the users are brought to a second page where they are shown the probability of their campaign's success and are also show the top 6 suggestions on how to improve their page layout.
 
 ## Getting Started
 
