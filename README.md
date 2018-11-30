@@ -91,7 +91,7 @@ where you can paste your Kiva campaign URL into the search box. After hitting 'G
 
 ## Launched webapp
 
-Visit [opt4kiva](www.opt4kiva.com) to experience the functional Flask+Bootstrap webapp.
+Visit www.opt4kiva.com to experience the functional Flask+Bootstrap webapp.
 
 
 
