@@ -68,31 +68,33 @@ To run the Flask web app locally, type:
 $ python run.py
 ```
 
-then go to http://0.0.0.0:5000/ in your favorite web browser.
+then go to http://0.0.0.0:5000/ in your favorite web browser to launch the webapp.
+
+
+## Final product: Flask webapp
+
+Once the Flask webapp is deployed on an AWS EC2 instance and the IP address is forwarded to your domain name, you can expect to have a website with a landing page that looks like:
+
+![img_landing_page](screenshot_landing_page.png)
+
+where you can paste your Kiva campaign URL into the search box. After hitting 'GO', the 'Campaign Analyzed' page appears like this:
+
+![img_analyzed_1](screenshot_analyzed_1.png)
+
+... and continue scrolling down to see recommendations
+
+![img_analyzed_2](screenshot_analyzed_2.png)
+
+... keep scrolling to see the final recommendations.
+
+![img_analyzed_3](screenshot_analyzed_3.png)
+
+## Launched webapp
+
+Visit [opt4kiva](www.opt4kiva.com) to experience the functional Flask+Bootstrap webapp.
 
 
 
-
-<!--
-## Comments on the data
-
-I chose to model the data using two different algorithms since we do not know whether the decision boundary is linear or non-linear: logistic regression and random forest. Since the dataset is imbalanced (5.15% monthly churn), I chose to train by optimizing the F1-score instead of accuracy.
-
-To better deal with class imablance of the churn rate, for both algorithms, class weights were 'balanced'. Other hyperparamters selected with GridSearchCV. The set of hyperparamterers that maximized the F1-score was chosen as the best classifier. Training was performed with 10-fold cross validation.
-
-Data was initially scaled using the StandardScaler for logistic regression only but for both classifiers, categorical features were one-hot encoded.
-
-## Expected results
-
-In the plots/ directory, the following images of confusion matrices should appear:
-
-Logisitic regression classifier:
-![img1](plots/logistic_regression_confusion_matrix.png)
-
-Random forest classifier:
-![img2](plots/random_forest_confusion_matrix.png)
-
--->
 
 ## Authors
 
