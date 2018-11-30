@@ -75,19 +75,19 @@ then go to http://0.0.0.0:5000/ in your favorite web browser to launch the webap
 
 Once the Flask webapp is deployed on an AWS EC2 instance and the IP address is forwarded to your domain name, you can expect to have a website with a landing page that looks like:
 
-![img_landing_page](screenshot_landing_page.png)
+![img_landing_page](screenshot_landing_page.jpg)
 
 where you can paste your Kiva campaign URL into the search box. After hitting 'GO', the 'Campaign Analyzed' page appears like this:
 
-![img_analyzed_1](screenshot_analyzed_1.png)
+![img_analyzed_1](screenshot_analyzed_1.jpg)
 
 ... and continue scrolling down to see recommendations
 
-![img_analyzed_2](screenshot_analyzed_2.png)
+![img_analyzed_2](screenshot_analyzed_2.jpg)
 
 ... keep scrolling to see the final recommendations.
 
-![img_analyzed_3](screenshot_analyzed_3.png)
+![img_analyzed_3](screenshot_analyzed_3.jpg)
 
 ## Launched webapp
 
